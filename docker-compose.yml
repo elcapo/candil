@@ -1,0 +1,37 @@
+version: '3.8'
+services:
+  mariadb:
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MARIADB_DATABASE=${DB_DATABASE}
+      - MARIADB_USER=${DB_USERNAME}
+      - MARIADB_PASSWORD=${DB_PASSWORD}
+    hostname: mariadb
+    image: mariadb:10.7
+    networks:
+      - candil
+    restart: always
+    volumes:
+      - ./_volumes/mysql/database_data/:/var/lib/mysql
+      - ./_volumes/mysql/conf.d/:/etc/mysql/conf.d
+      - ./_volumes/mysql/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d
+
+  php:
+    depends_on:
+      - "mariadb"
+    environment:
+      - PUID
+      - PGID
+    image: serversideup/php:8.1-fpm-nginx
+    networks:
+      - candil
+      - traefik
+    restart: always
+    volumes:
+      - .:/var/www/html/:cached
+    working_dir: /var/www/html
+
+networks:
+  candil:
+  traefik:
+    external: true
