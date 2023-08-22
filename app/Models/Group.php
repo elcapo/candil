@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Group extends Model
 {
@@ -11,6 +12,7 @@ class Group extends Model
 
     protected $fillable = [
         'name',
+        'type',
         'email',
         'phone',
         'street',
@@ -18,4 +20,9 @@ class Group extends Model
         'province',
         'zip_code',
     ];
+
+    public function activists(): BelongsToMany
+    {
+        return $this->belongsToMany(Activist::class);
+    }
 }

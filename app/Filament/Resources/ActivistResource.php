@@ -24,7 +24,7 @@ class ActivistResource extends Resource
 {
     protected static ?string $model = Activist::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-users';
+    protected static ?string $navigationIcon = 'heroicon-o-user';
 
     protected static ?string $recordTitleAttribute = 'full_name';
 
@@ -204,13 +204,19 @@ class ActivistResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('city')
                     ->label(trans('candil/activist.city'))
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('province')
                     ->label(trans('candil/activist.province'))
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('zip_code')
                     ->label(trans('candil/activist.zip_code'))
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->sortable()
+                    ->searchable(),
             ])
             ->filters([
                 //
