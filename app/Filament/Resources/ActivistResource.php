@@ -9,6 +9,7 @@ use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -35,35 +36,89 @@ class ActivistResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
+            ->columns(4)
             ->schema([
-                Grid::make()
-                    ->columns(['xl' => 3])
-                    ->schema([
-                        TextInput::make('first_name')
-                            ->label(trans('candil/activist.first_name'))
-                            ->required(),
-                        TextInput::make('surname')
-                            ->label(trans('candil/activist.surname'))
-                            ->required(),
-                        TextInput::make('second_surname')
-                            ->label(trans('candil/activist.second_surname')),
-                    ]),
+                self::getNameFormSection(),
+                self::getContactFormSection(),
+                self::getPictureFormSection(),
+                self::getIdentificationFormSection(),
+                self::getDatesFormSection(),
+                self::getAddressFormSection(),
+            ]);
+    }
+
+    private static function getNameFormSection(): Section
+    {
+        return Section::make()
+            ->columns(['xl' => 3])
+            ->columnSpan(4)
+            ->schema([
+                TextInput::make('first_name')
+                    ->label(trans('candil/activist.first_name'))
+                    ->required(),
+                TextInput::make('surname')
+                    ->label(trans('candil/activist.surname'))
+                    ->required(),
+                TextInput::make('second_surname')
+                    ->label(trans('candil/activist.second_surname')),
+            ]);
+    }
+
+    private static function getContactFormSection(): Section
+    {
+        return Section::make()
+            ->columns(['xl' => 1])
+            ->columnSpan(1)
+            ->schema([
+                TextInput::make('email')
+                    ->label(trans('candil/activist.email')),
+                TextInput::make('phone')
+                    ->label(trans('candil/activist.phone')),
+                TextInput::make('second_phone')
+                    ->label(trans('candil/activist.second_phone')),
+            ]);
+    }
+
+    private static function getPictureFormSection(): Section
+    {
+        return Section::make()
+            ->columns(['xl' => 3])
+            ->columnSpan(3)
+            ->schema([
+                FileUpload::make('picture_filename')
+                    ->label(trans('candil/activist.picture'))
+                    ->visibility('private')
+                    ->image()
+                    ->columnSpanFull()
+            ]);
+    }
+
+    private static function getIdentificationFormSection(): Section
+    {
+        return Section::make()
+            ->columns(['xl' => 2])
+            ->columnSpan(2)
+            ->schema([
                 TextInput::make('identity_number')
                     ->label(trans('candil/activist.identity_number'))
                     ->required(),
                 Select::make('identity_type')
                     ->label(trans('candil/activist.identity_type'))
+                    ->default('nif')
                     ->options([
                         'nif' => 'NIF',
                         'nie' => 'NIE',
                         'other' => 'Otro',
-                    ])
-                    ->default('nif'),    
-                FileUpload::make('picture_filename')
-                    ->label(trans('candil/activist.picture'))
-                    ->visibility('private')
-                    ->image()
-                    ->columnSpanFull(),
+                    ]),
+            ]);
+    }
+
+    private static function getDatesFormSection(): Section
+    {
+        return Section::make()
+            ->columns(['xl' => 2])
+            ->columnSpan(2)
+            ->schema([
                 DatePicker::make('birth_date')
                     ->label(trans('candil/activist.birth_date'))
                     ->required()
@@ -73,16 +128,15 @@ class ActivistResource extends Resource
                     ->label(trans('candil/activist.join_date'))
                     ->native(false)
                     ->displayFormat('d/m/Y'),
-                Grid::make()
-                    ->columns(['xl' => 3])
-                    ->schema([
-                        TextInput::make('email')
-                            ->label(trans('candil/activist.email')),
-                        TextInput::make('phone')
-                            ->label(trans('candil/activist.phone')),
-                        TextInput::make('second_phone')
-                            ->label(trans('candil/activist.second_phone')),
-                    ]),
+            ]);
+    }
+
+    private static function getAddressFormSection(): Section
+    {
+        return Section::make()
+            ->columns(['xl' => 4])
+            ->columnSpan(4)
+            ->schema([
                 TextInput::make('street')
                     ->label(trans('candil/activist.street')),
                 TextInput::make('city')
