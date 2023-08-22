@@ -152,8 +152,7 @@ class ActivistResource extends Resource
                     ->label(trans('candil/activist.join_date'))
                     ->toggleable(isToggledHiddenByDefault: false)
                     ->dateTime('d/m/Y')
-                    ->sortable()
-                    ->searchable(),
+                    ->sortable(),
                 TextColumn::make('identity_number')
                     ->label(trans('candil/activist.identity_number'))
                     ->toggleable(isToggledHiddenByDefault: true)

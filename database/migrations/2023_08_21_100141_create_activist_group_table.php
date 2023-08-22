@@ -17,6 +17,12 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Activist::class);
             $table->foreignIdFor(Group::class);
+            $table->enum('status', [
+                'in_practice',
+                'active',
+                'inactive',
+            ]);
+            $table->date('join_date');
             $table->timestamps();
         });
     }

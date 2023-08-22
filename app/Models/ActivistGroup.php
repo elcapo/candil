@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class ActivistGroup extends Model
+class ActivistGroup extends Pivot
 {
     use HasFactory;
 
@@ -14,5 +15,7 @@ class ActivistGroup extends Model
     protected $fillable = [
         'activist_id',
         'group_id',
+        'join_date',
+        'status',
     ];
 }
