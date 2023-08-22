@@ -2,6 +2,7 @@
 
 return [
     'model_label' => 'group',
+    'plural_model_title' => 'Groups',
     'name' => 'Name',
     'type' => 'Type',
     'types' => [

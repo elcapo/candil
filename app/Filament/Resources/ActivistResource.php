@@ -3,12 +3,10 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ActivistResource\Pages;
-use App\Filament\Resources\ActivistResource\RelationManagers;
+use App\Filament\Resources\ActivistResource\RelationManagers\GroupsRelationManager;
 use App\Models\Activist;
-use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -17,8 +15,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ActivistResource extends Resource
 {
@@ -89,7 +85,7 @@ class ActivistResource extends Resource
                     ->label(trans('candil/activist.picture'))
                     ->visibility('private')
                     ->image()
-                    ->columnSpanFull()
+                    ->columnSpanFull(),
             ]);
     }
 
@@ -233,14 +229,14 @@ class ActivistResource extends Resource
                 Tables\Actions\CreateAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
-            //
+            GroupsRelationManager::class,
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [

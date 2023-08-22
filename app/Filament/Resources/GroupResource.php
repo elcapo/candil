@@ -3,20 +3,15 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\GroupResource\Pages;
-use App\Filament\Resources\GroupResource\RelationManagers;
 use App\Models\Group;
-use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class GroupResource extends Resource
 {
@@ -41,7 +36,6 @@ class GroupResource extends Resource
                 self::getAddressFormSection(),
             ]);
     }
-
 
     private static function getNameFormSection(): Section
     {
@@ -112,7 +106,7 @@ class GroupResource extends Resource
                     ->label(trans('candil/group.type'))
                     ->sortable()
                     ->searchable()
-                    ->formatStateUsing(fn (string $state) => match($state) {
+                    ->formatStateUsing(fn (string $state) => match ($state) {
                         'local_group' => trans('candil/group.types.local_group'),
                         'action_group' => trans('candil/group.types.action_group'),
                         'university_group' => trans('candil/group.types.university_group'),
@@ -168,14 +162,14 @@ class GroupResource extends Resource
                 Tables\Actions\CreateAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -183,5 +177,5 @@ class GroupResource extends Resource
             'create' => Pages\CreateGroup::route('/create'),
             'edit' => Pages\EditGroup::route('/{record}/edit'),
         ];
-    }    
+    }
 }
