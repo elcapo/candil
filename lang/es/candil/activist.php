@@ -5,6 +5,7 @@ return [
     'identity_number' => 'Número de documento',
     'identity_type' => 'Tipo de documento',
     'picture' => 'Fotografía',
+    'full_name' => 'Nombre completo',
     'first_name' => 'Nombre',
     'surname' => 'Primer apellido',
     'second_surname' => 'Segundo apellido',

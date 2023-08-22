@@ -23,6 +23,11 @@ class Group extends Model
 
     public function activists(): BelongsToMany
     {
-        return $this->belongsToMany(Activist::class);
+        return $this->belongsToMany(Activist::class)
+            ->using(ActivistGroup::class)
+            ->withPivot([
+                'join_date',
+                'status',
+            ]);
     }
 }

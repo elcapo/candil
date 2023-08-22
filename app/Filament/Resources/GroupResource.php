@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\GroupResource\Pages;
+use App\Filament\Resources\GroupResource\RelationManagers\ActivistsRelationManager;
 use App\Models\Group;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -166,7 +167,7 @@ class GroupResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            ActivistsRelationManager::class,
         ];
     }
 

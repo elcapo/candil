@@ -5,6 +5,7 @@ return [
     'identity_number' => 'Identity number',
     'identity_type' => 'Identity type',
     'picture' => 'Picture',
+    'full_name' => 'Nombre completo',
     'first_name' => 'First name',
     'surname' => 'Surname',
     'second_surname' => 'Second surname',
