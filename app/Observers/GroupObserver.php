@@ -14,6 +14,10 @@ class GroupObserver
      */
     public function created(Group $group): void
     {
+        if (User::whereEmail($group->email)->exists()) {
+            return;
+        }
+
         User::create([
             'name' => $group->name,
             'email' => $group->email,
@@ -31,6 +35,10 @@ class GroupObserver
         }
 
         User::whereEmail($group->getOriginal('email'))->delete();
+
+        if (User::whereEmail($group->email)->exists()) {
+            return;
+        }
 
         User::create([
             'name' => $group->name,
