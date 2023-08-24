@@ -76,7 +76,9 @@ class GroupResource extends Resource
             ->columnSpan(4)
             ->schema([
                 TextInput::make('email')
-                    ->label(trans('candil/group.email')),
+                    ->label(trans('candil/group.email'))
+                    ->required()
+                    ->unique(ignoreRecord: true),
                 TextInput::make('phone')
                     ->label(trans('candil/group.phone')),
             ]);
