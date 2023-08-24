@@ -41,7 +41,7 @@ class GroupResource extends Resource
     private static function getNameFormSection(): Section
     {
         return Section::make()
-            ->columns(['xl' => 2])
+            ->columns(['xl' => 3])
             ->columnSpan(4)
             ->schema([
                 TextInput::make('name')
@@ -62,6 +62,10 @@ class GroupResource extends Resource
                         'commission' => trans('candil/group.types.commission'),
                         'work_group' => trans('candil/group.types.work_group'),
                     ]),
+                Select::make('part_of_group_id')
+                    ->relationship('parent', 'name')
+                    ->label(trans('candil/group.part_of'))
+                    ->searchable(),
             ]);
     }
 

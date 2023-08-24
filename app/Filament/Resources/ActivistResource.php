@@ -63,11 +63,12 @@ class ActivistResource extends Resource
     private static function getContactFormSection(): Section
     {
         return Section::make()
-            ->columns(['xl' => 1])
-            ->columnSpan(1)
+            ->columns(['xl' => 2])
+            ->columnSpan(2)
             ->schema([
                 TextInput::make('email')
-                    ->label(trans('candil/activist.email')),
+                    ->label(trans('candil/activist.email'))
+                    ->columnSpan(2),
                 TextInput::make('phone')
                     ->label(trans('candil/activist.phone')),
                 TextInput::make('second_phone')
@@ -78,8 +79,8 @@ class ActivistResource extends Resource
     private static function getPictureFormSection(): Section
     {
         return Section::make()
-            ->columns(['xl' => 3])
-            ->columnSpan(3)
+            ->columns(['xl' => 2])
+            ->columnSpan(2)
             ->schema([
                 FileUpload::make('picture_filename')
                     ->label(trans('candil/activist.picture'))
@@ -122,8 +123,10 @@ class ActivistResource extends Resource
                     ->displayFormat('d/m/Y'),
                 DatePicker::make('join_date')
                     ->label(trans('candil/activist.join_date'))
+                    ->required()
                     ->native(false)
-                    ->displayFormat('d/m/Y'),
+                    ->displayFormat('d/m/Y')
+                    ->default(fn () => \Carbon\Carbon::today()),
             ]);
     }
 

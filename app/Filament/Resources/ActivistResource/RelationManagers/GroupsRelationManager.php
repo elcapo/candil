@@ -24,20 +24,31 @@ class GroupsRelationManager extends RelationManager
     public function form(Form $form): Form
     {
         return $form
+            ->columns(3)
             ->schema([
                 DatePicker::make('join_date')
                     ->label(trans('candil/collaboration.join_date'))
                     ->required()
                     ->native(false)
+                    ->default(fn () => \Carbon\Carbon::today())
                     ->displayFormat('d/m/Y'),
                 Select::make('status')
                     ->label(trans('candil/collaboration.status'))
                     ->required()
+                    ->default('active')
                     ->options([
                         'in_practice' => trans('candil/collaboration.statuses.in_practice'),
                         'active' => trans('candil/collaboration.statuses.active'),
                         'inactive' => trans('candil/collaboration.statuses.inactive'),
-                    ]),
+                    ])
+                    ->afterStateUpdated(function ($set, $state) {
+                        // https://github.com/filamentphp/filament/issues/8010
+                        $set('leave_date', $state == 'inactive' ? \Carbon\Carbon::today() : null);
+                    }),
+                DatePicker::make('leave_date')
+                    ->label(trans('candil/collaboration.leave_date'))
+                    ->native(false)
+                    ->displayFormat('d/m/Y'),
             ]);
     }
 
@@ -59,6 +70,10 @@ class GroupsRelationManager extends RelationManager
                         'active' => trans('candil/collaboration.statuses.active'),
                         'inactive' => trans('candil/collaboration.statuses.inactive'),
                     }),
+                TextColumn::make('leave_date')
+                    ->label(trans('candil/collaboration.leave_date'))
+                    ->sortable()
+                    ->dateTime('d/m/Y'),
                 TextColumn::make('name')
                     ->label(trans('candil/group.name'))
                     ->sortable(),
@@ -80,12 +95,12 @@ class GroupsRelationManager extends RelationManager
                     }),
                 TextColumn::make('email')
                     ->label(trans('candil/group.email'))
-                    ->toggleable(isToggledHiddenByDefault: false)
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('phone')
                     ->label(trans('candil/group.phone'))
-                    ->toggleable(isToggledHiddenByDefault: false)
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('street')
@@ -116,7 +131,27 @@ class GroupsRelationManager extends RelationManager
                         $action->getRecordSelect(),
                         DatePicker::make('join_date')
                             ->label(trans('candil/collaboration.join_date'))
-                            ->required(),
+                            ->required()
+                            ->default(fn() => \Carbon\Carbon::today())
+                            ->native(false)
+                            ->displayFormat('d/m/Y'),
+                        Select::make('status')
+                            ->label(trans('candil/collaboration.status'))
+                            ->required()
+                            ->default('active')
+                            ->options([
+                                'in_practice' => trans('candil/collaboration.statuses.in_practice'),
+                                'active' => trans('candil/collaboration.statuses.active'),
+                                'inactive' => trans('candil/collaboration.statuses.inactive'),
+                            ])
+                            ->afterStateUpdated(function ($set, $state) {
+                                // https://github.com/filamentphp/filament/issues/8010
+                                $set('leave_date', $state == 'inactive' ? \Carbon\Carbon::today() : null);
+                            }),
+                        DatePicker::make('leave_date')
+                            ->label(trans('candil/collaboration.leave_date'))
+                            ->native(false)
+                            ->displayFormat('d/m/Y'),
                     ]),
             ])
             ->actions([

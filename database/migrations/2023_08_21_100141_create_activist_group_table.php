@@ -23,6 +23,7 @@ return new class extends Migration
                 'inactive',
             ]);
             $table->date('join_date');
+            $table->date('leave_date')->nullable();
             $table->timestamps();
         });
     }

@@ -35,6 +35,7 @@ class Activist extends Model
             ->withPivot([
                 'join_date',
                 'status',
+                'leave_date',
             ]);
     }
 }

@@ -16,5 +16,6 @@ class ActivistGroup extends Pivot
         'group_id',
         'join_date',
         'status',
+        'leave_date',
     ];
 }
