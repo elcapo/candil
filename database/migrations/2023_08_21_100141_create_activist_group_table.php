@@ -24,7 +24,6 @@ return new class extends Migration
             ]);
             $table->date('join_date');
             $table->date('leave_date')->nullable();
-            $table->timestamps();
         });
     }
 

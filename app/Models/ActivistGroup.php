@@ -18,4 +18,6 @@ class ActivistGroup extends Pivot
         'status',
         'leave_date',
     ];
+
+    public $timestamps = false;
 }
