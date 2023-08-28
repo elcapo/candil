@@ -24,7 +24,7 @@ class ActivistObserver
 
     private static function full_name(Activist $activist): string
     {
-        return join(' ', array_filter([
+        return implode(' ', array_filter([
             $activist->first_name,
             $activist->surname,
             $activist->second_surname,
