@@ -43,10 +43,6 @@ class ActivistPolicy
 
         $group = Group::whereEmail($user->email)->first();
 
-        if (! $group) {
-            return false;
-        }
-
         return ! $activist->groups()->exists() ||
             $activist->groups()->whereGroupId($group->id)->exists() ||
             $activist->groups()->wherePartOfGroupId($group->id)->exists();
