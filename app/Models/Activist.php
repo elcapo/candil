@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use OwenIt\Auditing\Auditable as IsAuditable;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Activist extends Model
+class Activist extends Model implements Auditable
 {
-    use HasFactory;
+    use HasFactory, IsAuditable;
 
     protected $fillable = [
         'identity_number',

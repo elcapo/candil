@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\RefreshableAuditsRelationManager;
 use App\Filament\Resources\ActivistResource\Pages;
 use App\Filament\Resources\ActivistResource\RelationManagers\GroupsRelationManager;
 use App\Models\Activist;
@@ -236,6 +237,7 @@ class ActivistResource extends Resource
     {
         return [
             GroupsRelationManager::class,
+            RefreshableAuditsRelationManager::class,
         ];
     }
 

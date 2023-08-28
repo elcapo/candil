@@ -2,11 +2,11 @@
 
 namespace App\Filament\Resources\ActivistResource\Pages;
 
+use App\Filament\EditAuditableRecord;
 use App\Filament\Resources\ActivistResource;
 use Filament\Actions;
-use Filament\Resources\Pages\EditRecord;
 
-class EditActivist extends EditRecord
+class EditActivist extends EditAuditableRecord
 {
     protected static string $resource = ActivistResource::class;
 

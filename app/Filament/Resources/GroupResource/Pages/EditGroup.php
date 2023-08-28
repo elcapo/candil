@@ -2,11 +2,11 @@
 
 namespace App\Filament\Resources\GroupResource\Pages;
 
+use App\Filament\EditAuditableRecord;
 use App\Filament\Resources\GroupResource;
 use Filament\Actions;
-use Filament\Resources\Pages\EditRecord;
 
-class EditGroup extends EditRecord
+class EditGroup extends EditAuditableRecord
 {
     protected static string $resource = GroupResource::class;
 
