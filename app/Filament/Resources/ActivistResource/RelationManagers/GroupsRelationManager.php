@@ -132,7 +132,7 @@ class GroupsRelationManager extends RelationManager
                         DatePicker::make('join_date')
                             ->label(trans('candil/collaboration.join_date'))
                             ->required()
-                            ->default(fn() => \Carbon\Carbon::today())
+                            ->default(fn () => \Carbon\Carbon::today())
                             ->native(false)
                             ->displayFormat('d/m/Y'),
                         Select::make('status')

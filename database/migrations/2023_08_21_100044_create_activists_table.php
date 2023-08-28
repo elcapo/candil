@@ -4,9 +4,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use Tpetry\QueryExpressions\Function\Conditional\Coalesce;
-use Tpetry\QueryExpressions\Function\String\Concat;
-use Tpetry\QueryExpressions\Value\Value;
 
 return new class extends Migration
 {
@@ -25,19 +22,7 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('surname');
             $table->string('second_surname')->nullable();
-            $table->string('full_name')
-                ->virtualAs(
-                    (new Concat([
-                        'first_name',
-                        new Value(' '),
-                        'surname',
-                        new Value(' '),
-                        new Coalesce([
-                            'second_surname',
-                            new Value(''),
-                        ]),
-                    ]))->getValue($grammar)
-                );
+            $table->string('full_name');
             $table->date('birth_date');
             $table->date('join_date');
             $table->string('email')->nullable();
