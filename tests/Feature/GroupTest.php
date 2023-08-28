@@ -1,6 +1,5 @@
 <?php
 
-use App\Filament\Resources\ActivistResource\Pages\CreateActivist;
 use App\Filament\Resources\GroupResource\Pages\CreateGroup;
 
 use function Pest\Livewire\livewire;
