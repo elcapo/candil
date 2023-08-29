@@ -5,7 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Group;
-use App\Models\Person;
+use App\Models\Activist;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,8 +15,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Group::factory(10)->withParent()->create();
-        Person::factory(50)->withActiveCollaborations();
-        Person::factory(20)->withActiveCollaborations()->withInactiveCollaborations();
+        Group::factory(10)
+            ->withParent()
+            ->create();
+
+        foreach (range(1, 10) as $foo) {
+            Activist::factory(5)
+                ->withInactiveCollaborations()
+                ->withActiveCollaborations()
+                ->create();
+        }
     }
 }

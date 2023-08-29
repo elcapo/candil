@@ -2,10 +2,11 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\CanDeleteBulk;
 use App\Filament\RefreshableAuditsRelationManager;
 use App\Filament\Resources\ActivistResource\Pages;
 use App\Filament\Resources\ActivistResource\RelationManagers\GroupsRelationManager;
-use App\Models\Person;
+use App\Models\Activist;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
@@ -14,12 +15,17 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\DeleteBulkAction;
+use Filament\Tables\Actions\ForceDeleteBulkAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ActivistResource extends Resource
 {
-    protected static ?string $model = Person::class;
+    protected static ?string $model = Activist::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-user';
 
@@ -218,14 +224,19 @@ class ActivistResource extends Resource
                     ->searchable(),
             ])
             ->filters([
-                //
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    //
+                    Tables\Actions\DeleteBulkAction::make()
+                        ->before(fn (DeleteBulkAction $action, Collection $records) => CanDeleteBulk::check($action, $records)),
+                    Tables\Actions\ForceDeleteBulkAction::make()
+                        ->before(fn (ForceDeleteBulkAction $action, Collection $records) => CanDeleteBulk::check($action, $records)),
+                    Tables\Actions\RestoreBulkAction::make(),
                 ]),
             ])
             ->emptyStateActions([
@@ -261,5 +272,13 @@ class ActivistResource extends Resource
             'phone',
             'second_phone',
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->withoutGlobalScopes([
+                SoftDeletingScope::class,
+            ]);
     }
 }

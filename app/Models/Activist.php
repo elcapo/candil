@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Auditable as IsAuditable;
 use OwenIt\Auditing\Contracts\Auditable;
 
-class Person extends Model implements Auditable
+class Activist extends Model implements Auditable
 {
-    use HasFactory, IsAuditable;
+    use HasFactory, SoftDeletes, IsAuditable;
 
     protected $table = 'activists';
 
@@ -31,6 +32,11 @@ class Person extends Model implements Auditable
         'province',
         'zip_code',
     ];
+
+    public function canBeDeleted(): bool
+    {
+        return ! $this->groups()->exists();
+    }
 
     public function groups(): BelongsToMany
     {

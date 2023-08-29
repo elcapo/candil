@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('province')->nullable();
             $table->string('zip_code')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

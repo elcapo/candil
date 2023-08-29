@@ -14,6 +14,8 @@ class EditGroup extends EditAuditableRecord
     {
         return [
             Actions\DeleteAction::make(),
+            Actions\RestoreAction::make(),
+            Actions\ForceDeleteAction::make(),
         ];
     }
 }

@@ -35,6 +35,7 @@ return new class extends Migration
             $table->string('zip_code')->nullable();
             $table->foreignIdFor(Group::class, 'part_of_group_id')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

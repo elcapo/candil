@@ -44,6 +44,10 @@ class ActivistsRelationManager extends RelationManager
                         'active' => trans('candil/collaboration.statuses.active'),
                         'inactive' => trans('candil/collaboration.statuses.inactive'),
                     }),
+                TextColumn::make('leave_date')
+                    ->label(trans('candil/collaboration.leave_date'))
+                    ->sortable()
+                    ->dateTime('d/m/Y'),
                 TextColumn::make('full_name')
                     ->label(trans('candil/activist.full_name'))
                     ->sortable()

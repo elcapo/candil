@@ -47,8 +47,8 @@ class ActivistGroupPolicy
             return false;
         }
 
-        return $activistGroup->group_id === $userGroup->id ||
-            $activistGroup->part_of_group_id === $userGroup->id;
+        return $userGroup->id === $activistGroup->group_id ||
+            $userGroup->id === $activistGroup->part_of_group_id;
     }
 
     /**
