@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Activist;
+use App\Models\Person;
 use App\Models\Group;
 use App\Models\User;
 
-class ActivistPolicy
+class PersonPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -19,7 +19,7 @@ class ActivistPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Activist $activist): bool
+    public function view(User $user, Person $person): bool
     {
         return true;
     }
@@ -35,7 +35,7 @@ class ActivistPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Activist $activist): bool
+    public function update(User $user, Person $person): bool
     {
         if ($user->is_admin) {
             return true;
@@ -44,19 +44,19 @@ class ActivistPolicy
         $group = Group::whereEmail($user->email)->first();
 
         if (! $group) {
-            return ! $activist->groups()->exists();
+            return ! $person->groups()->exists();
         }
 
-        return ! $activist->groups()->exists() ||
-            $activist->groups()->whereGroupId($group->id)->exists() ||
-            $activist->groups()->wherePartOfGroupId($group->id)->exists();
+        return ! $person->groups()->exists() ||
+            $person->groups()->whereGroupId($group->id)->exists() ||
+            $person->groups()->wherePartOfGroupId($group->id)->exists();
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Activist $activist): bool
+    public function delete(User $user, Person $person): bool
     {
-        return $this->update($user, $activist);
+        return $this->update($user, $person);
     }
 }

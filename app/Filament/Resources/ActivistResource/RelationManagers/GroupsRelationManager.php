@@ -16,6 +16,8 @@ class GroupsRelationManager extends RelationManager
 {
     protected static string $relationship = 'groups';
 
+    protected static ?string $inverseRelationship = 'activists';
+
     public static function getTitle(Model $ownerRecord, string $pageClass): string
     {
         return trans('candil/collaboration.plural_title');

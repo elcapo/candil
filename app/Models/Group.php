@@ -26,7 +26,7 @@ class Group extends Model implements Auditable
 
     public function activists(): BelongsToMany
     {
-        return $this->belongsToMany(Activist::class)
+        return $this->belongsToMany(Person::class, 'activist_group')
             ->using(ActivistGroup::class)
             ->withPivot([
                 'join_date',
