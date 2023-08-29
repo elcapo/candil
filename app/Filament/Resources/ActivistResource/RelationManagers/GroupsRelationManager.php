@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\ActivistResource\RelationManagers;
 
+use App\Models\Group;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
@@ -158,7 +159,8 @@ class GroupsRelationManager extends RelationManager
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DetachAction::make(),
+                Tables\Actions\DetachAction::make()
+                    ->visible(fn (Group $record) => auth()->user()->can('update', $record)),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
