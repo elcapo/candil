@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use OwenIt\Auditing\Auditable as IsAuditable;
 use OwenIt\Auditing\Contracts\Auditable;
 
-class Activist extends Model implements Auditable
+class Person extends Model implements Auditable
 {
     use HasFactory, IsAuditable;
+
+    protected $table = 'activists';
 
     protected $fillable = [
         'identity_number',

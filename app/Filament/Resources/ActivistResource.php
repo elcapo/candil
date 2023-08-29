@@ -5,7 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\RefreshableAuditsRelationManager;
 use App\Filament\Resources\ActivistResource\Pages;
 use App\Filament\Resources\ActivistResource\RelationManagers\GroupsRelationManager;
-use App\Models\Activist;
+use App\Models\Person;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
@@ -19,7 +19,7 @@ use Filament\Tables\Table;
 
 class ActivistResource extends Resource
 {
-    protected static ?string $model = Activist::class;
+    protected static ?string $model = Person::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-user';
 

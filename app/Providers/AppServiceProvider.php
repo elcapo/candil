@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Models\Activist;
 use App\Models\Group;
+use App\Models\Person;
 use App\Observers\ActivistObserver;
 use App\Observers\GroupObserver;
 use Illuminate\Support\ServiceProvider;
@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Activist::observe(ActivistObserver::class);
+        Person::observe(ActivistObserver::class);
         Group::observe(GroupObserver::class);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Activist;
+use App\Models\Person;
 use App\Models\Group;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('activist_group', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Activist::class);
+            $table->foreignIdFor(Person::class);
             $table->foreignIdFor(Group::class);
             $table->enum('status', [
                 'in_practice',
