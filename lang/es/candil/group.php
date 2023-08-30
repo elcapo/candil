@@ -2,9 +2,6 @@
 
 return [
     'model_label' => 'grupo',
-    'name' => 'Nombre',
-    'type' => 'Tipo',
-    'part_of' => 'Depende de',
     'types' => [
         'local_group' => 'Grupo local',
         'action_group' => 'Grupo de acción',
@@ -17,10 +14,4 @@ return [
         'commission' => 'Comisión',
         'work_group' => 'Grupo de trabajo',
     ],
-    'email' => 'Correo electrónico',
-    'phone' => 'Teléfono',
-    'street' => 'Calle',
-    'city' => 'Ciudad',
-    'province' => 'Provincia',
-    'zip_code' => 'Código postal',
 ];

@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'birth_date' => 'Birth date',
     'city' => 'City',
     'email' => 'Email',
     'first_name' => 'First name',
@@ -8,11 +9,16 @@ return [
     'identity_number' => 'Identity number',
     'identity_type' => 'Identity type',
     'join_date' => 'Join date',
+    'leave_date' => 'Leave date',
     'name' => 'Name',
+    'part_of_group' => 'Parent group',
     'part_of_group_id' => 'Id of the parent group',
+    'picture' => 'Picture',
     'phone' => 'Phone',
     'province' => 'Province',
+    'second_phone' => 'Second phone',
     'second_surname' => 'Second surname',
+    'status' => 'Status',
     'street' => 'Street',
     'surname' => 'Surname',
     'type' => 'Type',

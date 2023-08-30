@@ -3,9 +3,6 @@
 return [
     'model_label' => 'group',
     'plural_model_title' => 'Groups',
-    'name' => 'Name',
-    'type' => 'Type',
-    'part_of' => 'If part of',
     'types' => [
         'local_group' => 'Local group',
         'action_group' => 'Action group',
@@ -18,10 +15,4 @@ return [
         'commission' => 'Commission',
         'work_group' => 'Work group',
     ],
-    'email' => 'Email',
-    'phone' => 'Phone',
-    'street' => 'Street',
-    'city' => 'City',
-    'province' => 'Province',
-    'zip_code' => 'Zip code',
 ];

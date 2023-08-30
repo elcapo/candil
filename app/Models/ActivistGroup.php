@@ -3,11 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use OwenIt\Auditing\Auditable as IsAuditable;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class ActivistGroup extends Pivot
+class ActivistGroup extends Pivot implements Auditable
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes, IsAuditable;
 
     protected $table = 'activist_group';
 
@@ -19,5 +23,13 @@ class ActivistGroup extends Pivot
         'leave_date',
     ];
 
-    public $timestamps = false;
+    public function activist(): BelongsTo
+    {
+        return $this->belongsTo(Activist::class);
+    }
+
+    public function group(): BelongsTo
+    {
+        return $this->belongsTo(Group::class);
+    }
 }

@@ -1,10 +1,15 @@
 <?php
 
 return [
+    'model_label' => 'colaboración',
     'plural_title' => 'Colaboraciones',
-    'join_date' => 'Fecha de alta',
-    'leave_date' => 'Fecha de baja',
-    'status' => 'Estado',
+    'actions' => [
+        'create' => 'Crear colaboración',
+        'edit' => 'Editar colaboración',
+    ],
+    'filters' => [
+        'is_active' => 'Colaboraciones activas',
+    ],
     'statuses' => [
         'in_practice' => 'En prácticas',
         'active' => 'Activa',

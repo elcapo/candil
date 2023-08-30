@@ -30,13 +30,13 @@ class GroupsRelationManager extends RelationManager
             ->columns(3)
             ->schema([
                 DatePicker::make('join_date')
-                    ->label(trans('candil/collaboration.join_date'))
+                    ->label(trans('candil/attributes.join_date'))
                     ->required()
                     ->native(false)
                     ->default(fn () => \Carbon\Carbon::today())
                     ->displayFormat('d/m/Y'),
                 Select::make('status')
-                    ->label(trans('candil/collaboration.status'))
+                    ->label(trans('candil/attributes.status'))
                     ->required()
                     ->default('active')
                     ->options([
@@ -49,7 +49,7 @@ class GroupsRelationManager extends RelationManager
                         $set('leave_date', $state == 'inactive' ? \Carbon\Carbon::today() : null);
                     }),
                 DatePicker::make('leave_date')
-                    ->label(trans('candil/collaboration.leave_date'))
+                    ->label(trans('candil/attributes.leave_date'))
                     ->native(false)
                     ->displayFormat('d/m/Y'),
             ]);
@@ -61,11 +61,11 @@ class GroupsRelationManager extends RelationManager
             ->recordTitleAttribute('name')
             ->columns([
                 TextColumn::make('join_date')
-                    ->label(trans('candil/collaboration.join_date'))
+                    ->label(trans('candil/attributes.join_date'))
                     ->sortable()
                     ->dateTime('d/m/Y'),
                 TextColumn::make('status')
-                    ->label(trans('candil/collaboration.status'))
+                    ->label(trans('candil/attributes.status'))
                     ->sortable()
                     ->searchable()
                     ->formatStateUsing(fn (string $state) => match ($state) {
@@ -74,14 +74,14 @@ class GroupsRelationManager extends RelationManager
                         'inactive' => trans('candil/collaboration.statuses.inactive'),
                     }),
                 TextColumn::make('leave_date')
-                    ->label(trans('candil/collaboration.leave_date'))
+                    ->label(trans('candil/attributes.leave_date'))
                     ->sortable()
                     ->dateTime('d/m/Y'),
                 TextColumn::make('name')
-                    ->label(trans('candil/group.name'))
+                    ->label(trans('candil/attributes.name'))
                     ->sortable(),
                 TextColumn::make('type')
-                    ->label(trans('candil/group.type'))
+                    ->label(trans('candil/attributes.type'))
                     ->sortable()
                     ->searchable()
                     ->formatStateUsing(fn (string $state) => match ($state) {
@@ -133,13 +133,13 @@ class GroupsRelationManager extends RelationManager
                     ->form(fn (AttachAction $action): array => [
                         $action->getRecordSelect(),
                         DatePicker::make('join_date')
-                            ->label(trans('candil/collaboration.join_date'))
+                            ->label(trans('candil/attributes.join_date'))
                             ->required()
                             ->default(fn () => \Carbon\Carbon::today())
                             ->native(false)
                             ->displayFormat('d/m/Y'),
                         Select::make('status')
-                            ->label(trans('candil/collaboration.status'))
+                            ->label(trans('candil/attributes.status'))
                             ->required()
                             ->default('active')
                             ->options([
@@ -152,7 +152,7 @@ class GroupsRelationManager extends RelationManager
                                 $set('leave_date', $state == 'inactive' ? \Carbon\Carbon::today() : null);
                             }),
                         DatePicker::make('leave_date')
-                            ->label(trans('candil/collaboration.leave_date'))
+                            ->label(trans('candil/attributes.leave_date'))
                             ->native(false)
                             ->displayFormat('d/m/Y'),
                     ]),

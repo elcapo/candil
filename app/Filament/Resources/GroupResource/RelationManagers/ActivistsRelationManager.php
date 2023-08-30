@@ -32,11 +32,11 @@ class ActivistsRelationManager extends RelationManager
             ->recordTitleAttribute('full_name')
             ->columns([
                 TextColumn::make('join_date')
-                    ->label(trans('candil/collaboration.join_date'))
+                    ->label(trans('candil/attributes.join_date'))
                     ->sortable()
                     ->dateTime('d/m/Y'),
                 TextColumn::make('status')
-                    ->label(trans('candil/collaboration.status'))
+                    ->label(trans('candil/attributes.status'))
                     ->sortable()
                     ->searchable()
                     ->formatStateUsing(fn (string $state) => match ($state) {
@@ -45,19 +45,19 @@ class ActivistsRelationManager extends RelationManager
                         'inactive' => trans('candil/collaboration.statuses.inactive'),
                     }),
                 TextColumn::make('leave_date')
-                    ->label(trans('candil/collaboration.leave_date'))
+                    ->label(trans('candil/attributes.leave_date'))
                     ->sortable()
                     ->dateTime('d/m/Y'),
                 TextColumn::make('full_name')
-                    ->label(trans('candil/activist.full_name'))
+                    ->label(trans('candil/attributes.full_name'))
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('email')
-                    ->label(trans('candil/activist.email'))
+                    ->label(trans('candil/attributes.email'))
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('phone')
-                    ->label(trans('candil/activist.phone'))
+                    ->label(trans('candil/attributes.phone'))
                     ->sortable()
                     ->searchable(),
             ])

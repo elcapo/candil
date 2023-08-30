@@ -29,6 +29,8 @@ class ActivistResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-user';
 
+    protected static ?int $navigationSort = 1;
+
     protected static ?string $recordTitleAttribute = 'full_name';
 
     public static function getModelLabel(): string
@@ -57,13 +59,13 @@ class ActivistResource extends Resource
             ->columnSpan(4)
             ->schema([
                 TextInput::make('first_name')
-                    ->label(trans('candil/activist.first_name'))
+                    ->label(trans('candil/attributes.first_name'))
                     ->required(),
                 TextInput::make('surname')
-                    ->label(trans('candil/activist.surname'))
+                    ->label(trans('candil/attributes.surname'))
                     ->required(),
                 TextInput::make('second_surname')
-                    ->label(trans('candil/activist.second_surname')),
+                    ->label(trans('candil/attributes.second_surname')),
             ]);
     }
 
@@ -74,12 +76,12 @@ class ActivistResource extends Resource
             ->columnSpan(2)
             ->schema([
                 TextInput::make('email')
-                    ->label(trans('candil/activist.email'))
+                    ->label(trans('candil/attributes.email'))
                     ->columnSpan(2),
                 TextInput::make('phone')
-                    ->label(trans('candil/activist.phone')),
+                    ->label(trans('candil/attributes.phone')),
                 TextInput::make('second_phone')
-                    ->label(trans('candil/activist.second_phone')),
+                    ->label(trans('candil/attributes.second_phone')),
             ]);
     }
 
@@ -90,7 +92,7 @@ class ActivistResource extends Resource
             ->columnSpan(2)
             ->schema([
                 FileUpload::make('picture_filename')
-                    ->label(trans('candil/activist.picture'))
+                    ->label(trans('candil/attributes.picture'))
                     ->visibility('private')
                     ->image()
                     ->columnSpanFull(),
@@ -104,10 +106,10 @@ class ActivistResource extends Resource
             ->columnSpan(2)
             ->schema([
                 TextInput::make('identity_number')
-                    ->label(trans('candil/activist.identity_number'))
+                    ->label(trans('candil/attributes.identity_number'))
                     ->required(),
                 Select::make('identity_type')
-                    ->label(trans('candil/activist.identity_type'))
+                    ->label(trans('candil/attributes.identity_type'))
                     ->default('nif')
                     ->options([
                         'nif' => 'NIF',
@@ -124,12 +126,12 @@ class ActivistResource extends Resource
             ->columnSpan(2)
             ->schema([
                 DatePicker::make('birth_date')
-                    ->label(trans('candil/activist.birth_date'))
+                    ->label(trans('candil/attributes.birth_date'))
                     ->required()
                     ->native(false)
                     ->displayFormat('d/m/Y'),
                 DatePicker::make('join_date')
-                    ->label(trans('candil/activist.join_date'))
+                    ->label(trans('candil/attributes.join_date'))
                     ->required()
                     ->native(false)
                     ->displayFormat('d/m/Y')
@@ -144,13 +146,13 @@ class ActivistResource extends Resource
             ->columnSpan(4)
             ->schema([
                 TextInput::make('street')
-                    ->label(trans('candil/activist.street')),
+                    ->label(trans('candil/attributes.street')),
                 TextInput::make('city')
-                    ->label(trans('candil/activist.city')),
+                    ->label(trans('candil/attributes.city')),
                 TextInput::make('province')
-                    ->label(trans('candil/activist.province')),
+                    ->label(trans('candil/attributes.province')),
                 TextInput::make('zip_code')
-                    ->label(trans('candil/activist.zip_code')),
+                    ->label(trans('candil/attributes.zip_code')),
             ]);
     }
 
@@ -159,66 +161,66 @@ class ActivistResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('join_date')
-                    ->label(trans('candil/activist.join_date'))
+                    ->label(trans('candil/attributes.join_date'))
                     ->toggleable(isToggledHiddenByDefault: false)
                     ->dateTime('d/m/Y')
                     ->sortable(),
                 TextColumn::make('identity_number')
-                    ->label(trans('candil/activist.identity_number'))
+                    ->label(trans('candil/attributes.identity_number'))
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('identity_type')
-                    ->label(trans('candil/activist.identity_type'))
+                    ->label(trans('candil/attributes.identity_type'))
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('first_name')
-                    ->label(trans('candil/activist.first_name'))
+                    ->label(trans('candil/attributes.first_name'))
                     ->toggleable(isToggledHiddenByDefault: false)
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('surname')
-                    ->label(trans('candil/activist.surname'))
+                    ->label(trans('candil/attributes.surname'))
                     ->toggleable(isToggledHiddenByDefault: false)
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('second_surname')
-                    ->label(trans('candil/activist.second_surname'))
+                    ->label(trans('candil/attributes.second_surname'))
                     ->toggleable(isToggledHiddenByDefault: false)
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('birth_date')
-                    ->label(trans('candil/activist.birth_date'))
+                    ->label(trans('candil/attributes.birth_date'))
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->dateTime('d/m/Y')
                     ->sortable(),
                 TextColumn::make('email')
-                    ->label(trans('candil/activist.email'))
+                    ->label(trans('candil/attributes.email'))
                     ->toggleable(isToggledHiddenByDefault: false)
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('phone')
-                    ->label(trans('candil/activist.phone'))
+                    ->label(trans('candil/attributes.phone'))
                     ->toggleable(isToggledHiddenByDefault: false)
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('second_phone')
-                    ->label(trans('candil/activist.second_phone'))
+                    ->label(trans('candil/attributes.second_phone'))
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('street')
-                    ->label(trans('candil/activist.street'))
+                    ->label(trans('candil/attributes.street'))
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('city')
-                    ->label(trans('candil/activist.city'))
+                    ->label(trans('candil/attributes.city'))
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('province')
-                    ->label(trans('candil/activist.province'))
+                    ->label(trans('candil/attributes.province'))
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('zip_code')
-                    ->label(trans('candil/activist.zip_code'))
+                    ->label(trans('candil/attributes.zip_code'))
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable()
                     ->searchable(),

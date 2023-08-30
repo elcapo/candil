@@ -27,6 +27,8 @@ class GroupResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
+    protected static ?int $navigationSort = 2;
+
     protected static ?string $recordTitleAttribute = 'name';
 
     public static function getModelLabel(): string
@@ -52,10 +54,10 @@ class GroupResource extends Resource
             ->columnSpan(4)
             ->schema([
                 TextInput::make('name')
-                    ->label(trans('candil/group.name'))
+                    ->label(trans('candil/attributes.name'))
                     ->required(),
                 Select::make('type')
-                    ->label(trans('candil/group.type'))
+                    ->label(trans('candil/attributes.type'))
                     ->required()
                     ->options([
                         'local_group' => trans('candil/group.types.local_group'),
@@ -71,7 +73,7 @@ class GroupResource extends Resource
                     ]),
                 Select::make('part_of_group_id')
                     ->relationship('parent', 'name')
-                    ->label(trans('candil/group.part_of'))
+                    ->label(trans('candil/attributes.part_of_group'))
                     ->searchable(),
             ]);
     }
@@ -83,11 +85,11 @@ class GroupResource extends Resource
             ->columnSpan(4)
             ->schema([
                 TextInput::make('email')
-                    ->label(trans('candil/group.email'))
+                    ->label(trans('candil/attributes.email'))
                     ->required()
                     ->unique(ignoreRecord: true),
                 TextInput::make('phone')
-                    ->label(trans('candil/group.phone')),
+                    ->label(trans('candil/attributes.phone')),
             ]);
     }
 
@@ -98,13 +100,13 @@ class GroupResource extends Resource
             ->columnSpan(4)
             ->schema([
                 TextInput::make('street')
-                    ->label(trans('candil/group.street')),
+                    ->label(trans('candil/attributes.street')),
                 TextInput::make('city')
-                    ->label(trans('candil/group.city')),
+                    ->label(trans('candil/attributes.city')),
                 TextInput::make('province')
-                    ->label(trans('candil/group.province')),
+                    ->label(trans('candil/attributes.province')),
                 TextInput::make('zip_code')
-                    ->label(trans('candil/group.zip_code')),
+                    ->label(trans('candil/attributes.zip_code')),
             ]);
     }
 
@@ -113,11 +115,11 @@ class GroupResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')
-                    ->label(trans('candil/group.name'))
+                    ->label(trans('candil/attributes.name'))
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('type')
-                    ->label(trans('candil/group.type'))
+                    ->label(trans('candil/attributes.type'))
                     ->sortable()
                     ->searchable()
                     ->formatStateUsing(fn (string $state) => match ($state) {
@@ -133,30 +135,30 @@ class GroupResource extends Resource
                         'work_group' => trans('candil/group.types.work_group'),
                     }),
                 TextColumn::make('email')
-                    ->label(trans('candil/group.email'))
+                    ->label(trans('candil/attributes.email'))
                     ->toggleable(isToggledHiddenByDefault: false)
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('phone')
-                    ->label(trans('candil/group.phone'))
+                    ->label(trans('candil/attributes.phone'))
                     ->toggleable(isToggledHiddenByDefault: false)
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('street')
-                    ->label(trans('candil/group.street'))
+                    ->label(trans('candil/attributes.street'))
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('city')
-                    ->label(trans('candil/group.city'))
+                    ->label(trans('candil/attributes.city'))
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('province')
-                    ->label(trans('candil/group.province'))
+                    ->label(trans('candil/attributes.province'))
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('zip_code')
-                    ->label(trans('candil/group.zip_code'))
+                    ->label(trans('candil/attributes.zip_code'))
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable()
                     ->searchable(),
