@@ -119,7 +119,8 @@ class ActivistGroupResource extends Resource
             ->filters([
                 Tables\Filters\Filter::make('is_active')
                     ->label(trans('candil/collaboration.filters.is_active'))
-                    ->query(fn (Builder $query): Builder => $query->whereIn('status', ['in_practice', 'active'])),
+                    ->query(fn (Builder $query): Builder => $query->whereIn('status', ['in_practice', 'active']))
+                    ->default(),
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
