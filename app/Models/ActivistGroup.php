@@ -6,12 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use OwenIt\Auditing\Auditable as IsAuditable;
-use OwenIt\Auditing\Contracts\Auditable;
 
-class ActivistGroup extends Pivot implements Auditable
+class ActivistGroup extends Pivot
 {
-    use HasFactory, SoftDeletes, IsAuditable;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'activist_group';
 
