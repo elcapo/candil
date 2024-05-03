@@ -1,35 +1,7 @@
 version: '3.8'
 services:
-  mailhog:
-    image: mailhog/mailhog
-    labels:
-      - "traefik.enable=true"
-      - "traefik.docker.network=traefik"
-      - "traefik.http.routers.candil-mailhog.entrypoints=web"
-      - "traefik.http.routers.candil-mailhog.rule=Host(`candil-mailhog.localhost`)"
-      - "traefik.http.routers.candil-mailhog.service=candil-mailhog"
-      - "traefik.http.services.candil-mailhog.loadbalancer.server.port=8025"
-    networks:
-      - candil
 
-  mariadb:
-    environment:
-      PRODUCTION: false
-    ports:
-      - "${DB_PUBLISHED_PORT}:3306"
-
-  node:
-    command: "npm run dev"
-    environment:
-      - NODE_ENV=production
-    image: node:lts
-    networks:
-      - candil
-    volumes:
-      - ./:/home/node/app
-    working_dir: /home/node/app
-
-  php:
+  core:
     environment:
       - SSL_MODE=off
       - PHP_SESSION_COOKIE_SECURE=false
@@ -42,3 +14,27 @@ services:
       - "traefik.http.routers.candil.rule=Host(`candil.localhost`)"
       - "traefik.http.routers.candil.service=candil"
       - "traefik.http.services.candil.loadbalancer.server.port=80"
+
+  mailhog:
+    image: mailhog/mailhog
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik"
+      - "traefik.http.routers.candil-mailhog.entrypoints=web"
+      - "traefik.http.routers.candil-mailhog.rule=Host(`candil-mailhog.localhost`)"
+      - "traefik.http.routers.candil-mailhog.service=candil-mailhog"
+      - "traefik.http.services.candil-mailhog.loadbalancer.server.port=8025"
+    networks:
+      - candil
+      - database
+
+  node:
+    command: "npm run dev"
+    environment:
+      - NODE_ENV=production
+    image: node:lts
+    networks:
+      - candil
+    volumes:
+      - ./:/home/node/app
+    working_dir: /home/node/app
